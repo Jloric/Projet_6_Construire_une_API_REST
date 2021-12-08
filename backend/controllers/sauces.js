@@ -7,7 +7,9 @@ exports.createSauces = (req, res, next) => {
     ...saucesObject,
     imageUrl:`${req.protocol}:// ${req.get('host')}/images/${req.file.filename}`
   });
+  console.log(sauces)
   sauces.save()
+  
     .then(() => {
       res.status(201).json({
         message: 'Post saved successfully!'});
