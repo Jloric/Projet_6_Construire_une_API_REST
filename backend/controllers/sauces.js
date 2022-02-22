@@ -3,14 +3,11 @@ const fs = require('fs');
 
 exports.createSauces = (req, res, next) => {
   const saucesObject = JSON.parse(req.body.sauce);
-  console.log(res.body) 
   const sauces = new Sauces({
     ...saucesObject,
-    //imageUrl:`${req.protocol}:// ${req.get('host')}/backend/images/${req.file.filename}`,
+    imageUrl:`${req.protocol}://${req.get('host')}/backend/images/${req.file.filename}`,
   });
-  console.log(image)
   sauces.save()
-  
   .then(() => {
     res.status(201).json({message: 'Sauces updated successfully!'}
   )})
@@ -33,7 +30,7 @@ exports.getOneSauces = (req, res, next) => {
 exports.modifySauces = (req, res, next) => {
     const saucesObject = req.file ?
     {
-      ...JSON.parse(req.body.sauces),
+      ...JSON.parse(req.body.sauce),
       imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     } : { ...req.body };
   Sauces.updateOne({ _id: req.params.id }, { ...saucesObject, _id: req.params.id })
@@ -62,8 +59,8 @@ exports.deleteSauces = (req, res, next) => {
 
 exports.getAllSauces = (req, res, next) => {
   Sauces.find()
-  .then((Sauces) => {
-      res.status(200).json(Sauces);
+  .then((sauces) => {
+      res.status(200).json(sauces);
     })
   .catch((error) => {
       res.status(400).json({error: error});
