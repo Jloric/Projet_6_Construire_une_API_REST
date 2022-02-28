@@ -17,9 +17,8 @@ exports.createSauces = (req, res, next) => {
 };
 
 exports.getOneSauces = (req, res, next) => {
-  Sauces.findOne({
-    _id: req.params.id
-  }).then((sauces) => {
+  Sauces.findOne({_id: req.params.id})
+  .then((sauces) => {
       res.status(200).json(sauces);
     })
     .catch((error) => {
