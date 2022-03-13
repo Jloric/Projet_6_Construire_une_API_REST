@@ -15,6 +15,5 @@ const saucesSchema = mongoose.Schema({
     usersDisliked:{type:Array}
 });
 
-//saucesSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('Sauces', saucesSchema);
